@@ -242,14 +242,24 @@ function openModal(index) {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
+    // アニメーション用のクラスを追加
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    
     // キーボードイベント追加
     document.addEventListener('keydown', handleKeydown);
 }
 
 // モーダル閉じる
 function closeModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    modal.classList.remove('show');
+    
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300);
+    
     document.removeEventListener('keydown', handleKeydown);
 }
 
