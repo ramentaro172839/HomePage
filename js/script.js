@@ -278,11 +278,27 @@ function showNextImage() {
 // モーダル画像更新
 function updateModalImage() {
     const artwork = filteredImages[currentImageIndex];
-    const imagePath = `画像/${artwork.filename}`;
+    const newImagePath = `画像/${artwork.filename}`;
     
-    modalImage.src = imagePath;
-    modalTitle.textContent = artwork.title;
-    modalYear.textContent = `${artwork.year}年`;
+    // まず古い画像をフェードアウト
+    modalImage.classList.add('fade-out');
+    
+    setTimeout(() => {
+        // 新しい画像をセットし、フェードイン
+        modalImage.src = newImagePath;
+        modalTitle.textContent = artwork.title;
+        modalYear.textContent = `${artwork.year}年`;
+        
+        modalImage.classList.remove('fade-out');
+        modalImage.classList.add('fade-in');
+        
+        // アニメーション完了後にクラスを削除
+        const handler = () => {
+            modalImage.classList.remove('fade-in');
+            modalImage.removeEventListener('transitionend', handler);
+        };
+        modalImage.addEventListener('transitionend', handler);
+    }, 200); // フェードアウトの時間に合わせる
 }
 
 // キーボードイベントハンドラ
