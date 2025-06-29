@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# 画像フォルダも許可
+Allow: /画像/
+Allow: /css/
+Allow: /js/
+
+# サイトマップの場所
+Sitemap: https://ramen-taro.com/sitemap.xml
+
+# クロール頻度の調整
+Crawl-delay: 1
